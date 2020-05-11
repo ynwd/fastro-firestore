@@ -47,10 +47,6 @@
     "lint": "eslint 'src/**/*.ts'",
     "build": "rm -rf dist &&  tsc --p tsconfig.build.json"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/fastrojs/fastro-firestore.git"
-  },
   "keywords": [
     "fastify",
     "typescript",
