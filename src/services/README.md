@@ -5,15 +5,12 @@ of your web application.
 
 - `*.service.ts` contains class that have function to manipulate the entity.
 - `*.controller.ts` contains all routes wrapped by controller.
-- `*.schema.ts` contains all schema need for perfomance, payload, and response validation.
 
 Place those files in a folder. Name the folder with specific usage:
 ```
 src/services
-├── web
-│   └── web.controller.ts
+├── hello.controller.ts
 └── user
     ├── user.controller.ts
-    ├── user.schema.ts
     └── user.service.ts
 ```
