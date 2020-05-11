@@ -2,8 +2,7 @@
 
 This is the core folder. Contains important files. Carefully modify it.
 
-- `basic.entity` is class for parent of all entities.
-- `basic.service` for DB-connection class.
+- `service` for DB-connection class.
 - `container` contains collection that save all method, controller, & service instance.
 - `core.plugin` contains core plugin.
 - `database` contains function to create db connection.
