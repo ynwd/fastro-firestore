@@ -1,4 +1,4 @@
-import { Controller, InjectService, Get, Post } from '../../core'
+import { Controller, InjectService, Get, Post } from '@fastro/core'
 import { UserService, User } from './user.service'
 import { UserService1 } from './user1.service'
 import { FastifyRequest, FastifyReply } from 'fastify'

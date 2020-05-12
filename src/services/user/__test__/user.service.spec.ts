@@ -1,4 +1,4 @@
-import { loader, serviceContainer } from '../../../core'
+import { loader, serviceContainer } from '@fastro/core'
 import { UserService } from '../user.service'
 
 let service: UserService

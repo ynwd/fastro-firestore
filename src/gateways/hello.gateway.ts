@@ -1,4 +1,4 @@
-import { Gateway, InjectController } from '../core'
+import { Gateway, InjectController } from '@fastro/core'
 import { HelloController } from '../services/hello.controller'
 
 @Gateway({ prefix: 'hello' })

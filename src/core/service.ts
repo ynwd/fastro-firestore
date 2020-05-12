@@ -1,5 +1,5 @@
 import { Firestore } from '@google-cloud/firestore'
-import { createError } from './index'
+import { createError } from '@fastro/core'
 
 let firestore: Firestore
 

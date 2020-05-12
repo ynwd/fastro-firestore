@@ -1,12 +1,13 @@
 {
-  "name": "@fastro/fastro-firestore",
-  "version": "0.1.10",
+  "name": "@fastro/firestore",
+  "version": "0.1.0",
   "description": "Dependency injection ready",
   "main": "index.js",
   "directories": {
     "test": "test"
   },
   "dependencies": {
+    "@fastro/core": "^0.1.1",
     "@google-cloud/firestore": "^3.7.5",
     "fastify": "^2.14.1",
     "fastify-plugin": "^1.6.1",

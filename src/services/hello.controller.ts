@@ -1,4 +1,4 @@
-import { Controller, Get } from '../core'
+import { Controller, Get } from '@fastro/core'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { ServerResponse } from 'http'
 

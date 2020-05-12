@@ -1,4 +1,5 @@
-import { Service, BasicService } from '../../core'
+import { BasicService } from '../../core'
+import { Service } from '@fastro/core'
 
 export type User = {
   documentId?: string;

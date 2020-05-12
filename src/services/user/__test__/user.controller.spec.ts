@@ -1,5 +1,6 @@
 import { FastifyInstance } from 'fastify'
-import { createServer, serviceContainer } from '../../../core'
+import { createServer } from '../../../core'
+import { serviceContainer } from '@fastro/core'
 import { UserService } from '../user.service'
 import { UserService1 } from '../user1.service'
 import { UserService2 } from '../user2.service'
