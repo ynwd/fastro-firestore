@@ -1,4 +1,5 @@
 import { Firestore } from '@google-cloud/firestore'
+import { createError } from './index'
 
 let firestore: Firestore
 
@@ -21,22 +22,54 @@ export abstract class BasicService {
     return this.firestore.collection(collectionPath)
   }
 
-  deleteCollection (collectionPath: string, batchSize: number): Promise<void> {
+  async save <T> (collectionPath: string, payload: T): Promise<T> {
+    const data: any = payload
+    const result = await this.collection(collectionPath).add(data)
+    data.documentId = result.id
+    return data as T
+  }
+
+  async update <T> (collectionPath: string, payload: T): Promise<T> {
+    const p: any = payload
+    if (!p.documentId) throw createError('UPDATE_SERVICE_ERROR', new Error('documentId empty'))
+    const dataRef = this.collection(collectionPath).doc(p.documentId)
+    delete p.documentId
+    await dataRef.update(payload)
+    const snapshot = await dataRef.get()
+    const data: any = snapshot.data()
+    data.documentId = snapshot.id
+    return data as T
+  }
+
+  getOne<T> (snapshot: FirebaseFirestore.QuerySnapshot<FirebaseFirestore.DocumentData>): T {
+    const [data] = snapshot.docs.map((documentSnapshot) => {
+      const res = documentSnapshot.data()
+      res.documentId = documentSnapshot.id
+      return res
+    })
+    return data as T
+  }
+
+  getAll<T> (snapshot: FirebaseFirestore.QuerySnapshot<FirebaseFirestore.DocumentData>): T[] {
+    const data: T[] = snapshot.docs.map((documentSnapshot) => {
+      const res = documentSnapshot.data()
+      res.documentId = documentSnapshot.id
+      return res as T
+    })
+    return data
+  }
+
+  async delete (collectionPath: string, documentId: string): Promise<FirebaseFirestore.WriteResult> {
+    return this.collection(collectionPath).doc(documentId).delete()
+  }
+
+  async deleteCollection (collectionPath: string, batchSize: number): Promise<any> {
     const collectionRef = this.collection(collectionPath)
     const query = collectionRef.orderBy('__name__').limit(batchSize)
 
     return new Promise((resolve, reject) => {
       this.deleteQueryBatch(query, resolve, reject)
     })
-  }
-
-  getData (snapshot: FirebaseFirestore.QuerySnapshot<FirebaseFirestore.DocumentData>): FirebaseFirestore.DocumentData {
-    const [data] = snapshot.docs.map((documentSnapshot) => {
-      const res = documentSnapshot.data()
-      res.documentId = documentSnapshot.id
-      return res
-    })
-    return data
   }
 
   private deleteQueryBatch (query: FirebaseFirestore.Query<FirebaseFirestore.DocumentData>, resolve, reject): void {

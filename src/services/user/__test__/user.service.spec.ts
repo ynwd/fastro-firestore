@@ -32,8 +32,11 @@ describe('user service', () => {
   test('update user', async () => {
     const user = await service.getUser('zaid3')
     if (!user.documentId) throw new Error('user empty')
-    const result = await service.updateUser(user.documentId, {
-      username: 'zaid3', email: 'tes@gmail.com', password: 'abc'
+    const result = await service.updateUser({
+      username: 'zaid3',
+      email: 'tes@gmail.com',
+      password: 'abc',
+      documentId: user.documentId
     })
     expect(result.email).toBe('tes@gmail.com')
   })

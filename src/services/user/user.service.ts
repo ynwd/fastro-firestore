@@ -9,42 +9,29 @@ export type User = {
 
 @Service()
 export class UserService extends BasicService {
-  async addUser ({ username, email, password }): Promise<User> {
-    const data: any = { email, username, password }
-    const result = await this.collection('user').add(data)
-    data.documentId = result.id
-    return data as User
+  async addUser (payload: User): Promise<User> {
+    return this.save<User>('user', payload)
+  }
+
+  async updateUser (payload: User): Promise<User> {
+    return this.update<User>('user', payload)
   }
 
   async getAllUser (): Promise<User[]> {
-    const query = this.collection('user')
-    const snapshot = await query.get()
-    const data = snapshot.docs.map((documentSnapshot) => {
-      const res = documentSnapshot.data()
-      res.documentId = documentSnapshot.id
-      return res as User
-    })
-    return data
+    const snapshot = await this.collection('user').get()
+    return this.getAll<User>(snapshot)
   }
 
   async getUser (username: string): Promise<User> {
-    const query = this.collection('user').where('username', '==', username).limit(1)
-    const snapshot = await query.get()
-    return this.getData(snapshot) as User
-  }
-
-  async updateUser (documentId: string, payload: User): Promise<User> {
-    const userRef = this.collection('user').doc(documentId)
-    delete payload.documentId
-    await userRef.update(payload)
-    const snapshot = await userRef.get()
-    const data = snapshot.data() as User
-    data.documentId = snapshot.id
-    return data
+    const snapshot = await this.collection('user')
+      .where('username', '==', username)
+      .limit(1)
+      .get()
+    return this.getOne<User>(snapshot)
   }
 
   async deleteUser (documentId: string): Promise<FirebaseFirestore.WriteResult> {
-    return this.collection('user').doc(documentId).delete()
+    return this.delete('user', documentId)
   }
 
   deleteAll (): void {
