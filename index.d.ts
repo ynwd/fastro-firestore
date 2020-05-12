@@ -98,7 +98,7 @@ export declare abstract class BasicService {
    * @param collectionPath
    * @param payload
    */
-  public save <T> (collectionPath: string, payload: any): Promise<T>
+  public save <T> (collectionPath: string, payload: T): Promise<T>
   /**
    * Update document
    * @param collectionPath
