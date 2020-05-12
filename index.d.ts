@@ -80,4 +80,5 @@ export declare abstract class BasicService {
   public firestore: Firestore
   public collection (collectionPath: string): FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData>
   public deleteCollection (collectionPath: string, batchSize: number): Promise<void>
+  public getData (snapshot: FirebaseFirestore.QuerySnapshot<FirebaseFirestore.DocumentData>): FirebaseFirestore.DocumentData
 }
