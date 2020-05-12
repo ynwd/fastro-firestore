@@ -1,4 +1,8 @@
 import { Firestore } from '@google-cloud/firestore'
+import fastify, { FastifyInstance } from 'fastify'
+
+export declare function createServer(fastifyOpts?: fastify.ServerOptions): Promise<FastifyInstance>
+export declare function start(server: FastifyInstance): Promise<void>
 
 export declare abstract class BasicService {
   /**
