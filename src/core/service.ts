@@ -24,6 +24,7 @@ export abstract class BasicService {
 
   async save <T> (collectionPath: string, payload: T): Promise<T> {
     const data: any = payload
+    if (data.documentId) delete data.documentId
     const result = await this.collection(collectionPath).add(data)
     data.documentId = result.id
     return data as T
