@@ -30,12 +30,7 @@ export class UserService extends BasicService {
   async getUser (username: string): Promise<User> {
     const query = this.collection('user').where('username', '==', username).limit(1)
     const snapshot = await query.get()
-    const [data] = snapshot.docs.map((documentSnapshot) => {
-      const res = documentSnapshot.data()
-      res.documentId = documentSnapshot.id
-      return res as User
-    })
-    return data
+    return this.getData(snapshot) as User
   }
 
   async updateUser (documentId: string, payload: User): Promise<User> {

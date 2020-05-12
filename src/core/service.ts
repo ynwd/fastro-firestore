@@ -30,6 +30,15 @@ export abstract class BasicService {
     })
   }
 
+  getData (snapshot: FirebaseFirestore.QuerySnapshot<FirebaseFirestore.DocumentData>): FirebaseFirestore.DocumentData {
+    const [data] = snapshot.docs.map((documentSnapshot) => {
+      const res = documentSnapshot.data()
+      res.documentId = documentSnapshot.id
+      return res
+    })
+    return data
+  }
+
   private deleteQueryBatch (query: FirebaseFirestore.Query<FirebaseFirestore.DocumentData>, resolve, reject): void {
     query.get()
       .then((snapshot) => {
