@@ -32,7 +32,7 @@ test('GET /user', async () => {
     url: '/user',
     method: 'GET'
   })
-  expect(result.payload).toBe('{"error":true,"message":"User not found"}')
+  expect(result.payload).toBe('{"message":"User not found","error":true}')
 })
 
 test('GET /user/1', async () => {
@@ -40,7 +40,7 @@ test('GET /user/1', async () => {
     url: '/user/1',
     method: 'GET'
   })
-  expect(result.payload).toBe('{"error":true,"message":"User not found"}')
+  expect(result.payload).toBe('{"message":"User not found","error":true}')
 })
 
 test('GET /user/2', async () => {
@@ -48,7 +48,7 @@ test('GET /user/2', async () => {
     url: '/user/2',
     method: 'GET'
   })
-  expect(result.payload).toBe('{"error":true,"message":"User not found"}')
+  expect(result.payload).toBe('{"message":"User not found","error":true}')
 })
 
 test('POST /user', async () => {

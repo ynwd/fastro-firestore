@@ -1,4 +1,4 @@
-import fastify, { FastifyInstance } from 'fastify'
+import { FastifyInstance, FastifyServerOptions } from 'fastify'
 import {
   configuration as config,
   createError,
@@ -10,7 +10,7 @@ import {
  * Check this for detail options: https://www.fastify.io/docs/latest/Server/
  * @param options - Fastify server options
  */
-export const createServer = async (options?: fastify.ServerOptions): Promise<FastifyInstance> => {
+export const createServer = async (options?: FastifyServerOptions): Promise<FastifyInstance> => {
   return createFastroServer(options)
 }
 

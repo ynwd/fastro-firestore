@@ -1,11 +1,10 @@
 import { Controller, Get } from '@fastro/core'
 import { FastifyReply, FastifyRequest } from 'fastify'
-import { ServerResponse } from 'http'
 
 @Controller()
 export class HelloController {
   @Get()
-  async hello (request: FastifyRequest, reply: FastifyReply<ServerResponse>): Promise<any> {
-    reply.send('hello')
+  async hello (request: FastifyRequest, reply: FastifyReply): Promise<FastifyReply> {
+    return reply.send('hello')
   }
 }

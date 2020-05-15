@@ -11,7 +11,7 @@ beforeAll(async () => {
   } catch (error) {
     console.log(error)
   }
-}, 3000)
+})
 
 describe('user service', () => {
   test('add user', async () => {
